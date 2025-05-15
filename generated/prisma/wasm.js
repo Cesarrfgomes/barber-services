@@ -127,6 +127,12 @@ exports.Prisma.ExpertScalarFieldEnum = {
   phone: 'phone'
 };
 
+exports.Prisma.QueueScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  expert_id: 'expert_id'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -144,7 +150,8 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  Expert: 'Expert'
+  Expert: 'Expert',
+  Queue: 'Queue'
 };
 
 /**
