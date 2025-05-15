@@ -18,7 +18,7 @@ import { ExpertsService } from "src/experts/experts.service";
 export class QueuesController {
   constructor(
     private readonly queuesService: QueuesService,
-    private readonly expertsService: ExpertsService
+    private readonly expertsService: ExpertsService,
   ) {}
 
   @Post()
@@ -30,12 +30,12 @@ export class QueuesController {
     }
 
     const queueExistToday = await this.queuesService.queueExpertExistToday(
-      data.expert_id
+      data.expert_id,
     );
 
     if (queueExistToday) {
       throw new BadRequestException(
-        "Já existe uma fila para esse expert na data de hoje"
+        "Já existe uma fila para esse expert na data de hoje",
       );
     }
 
@@ -47,7 +47,7 @@ export class QueuesController {
   @Get()
   async getExpertQueues(
     @Query("expert_id") expert_id: number,
-    @Res() res: Response
+    @Res() res: Response,
   ) {
     if (expert_id) {
       const expertExist = await this.expertsService.findExpert(expert_id);

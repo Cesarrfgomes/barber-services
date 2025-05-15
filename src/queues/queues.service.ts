@@ -32,6 +32,17 @@ export class QueuesService {
       include: { expert: true, CustomerQueue: true },
     });
 
-    return todayQueues;
+    return todayQueues.map((queue) => {
+      return {
+        ...queue,
+        CustomerQueue: queue.CustomerQueue.filter(
+          (customer) => customer.isAwaiting
+        ),
+      };
+    });
+  }
+
+  async deleteCustomer(id: number) {
+    await this.prisma.customerQueue.delete({ where: { id } });
   }
 }
