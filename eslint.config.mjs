@@ -33,13 +33,12 @@ export default tseslint.config(
           sinqleQuote: true,
           arrowParens: "avoid",
           endOfLine: "auto",
-          useTabs: true,
         },
       ],
       "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-floating-promises": "warn",
-      "@typescript-eslint/no-unsafe-argument": "warn",
-      "@typescript-eslint/no-unsafe-call": "off"
+      "@typescript-eslint/no-floating-promises": "off",
+      "@typescript-eslint/no-unsafe-argument": "off",
+      "@typescript-eslint/no-unsafe-call": "off",
     },
   }
 );
