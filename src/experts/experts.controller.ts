@@ -9,16 +9,19 @@ import {
   Post,
   Put,
   Res,
+  UseGuards,
 } from "@nestjs/common";
 import { ExpertsService } from "./experts.service";
 import CreateExpertsDto from "./dtos/create-experts";
 import { Response } from "express";
 import UpdateExpertDto from "./dtos/update-expert";
+import JwtAuthGuard from "src/auth/guards/jwt-guard";
 
 @Controller("experts")
 export class ExpertsController {
   constructor(private readonly expertsService: ExpertsService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() data: CreateExpertsDto, @Res() res: Response) {
     const expertExist = await this.expertsService.findExpertByEmail(data.email);
@@ -50,11 +53,12 @@ export class ExpertsController {
     return res.json(expert);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put(":id")
   async updateExpert(
     @Param("id") id: number,
     @Body() data: UpdateExpertDto,
-    @Res() res: Response,
+    @Res() res: Response
   ) {
     const expert = await this.expertsService.findExpert(id);
 
@@ -64,7 +68,7 @@ export class ExpertsController {
 
     if (data.email) {
       const emailExist = await this.expertsService.findExpertByEmail(
-        data.email,
+        data.email
       );
 
       if (emailExist && emailExist.email !== expert.email) {

@@ -8,19 +8,22 @@ import {
   Post,
   Query,
   Res,
+  UseGuards,
 } from "@nestjs/common";
 import { QueuesService } from "./queues.service";
 import CreateQueueDto from "./dtos/create-queue";
 import { Response } from "express";
 import { ExpertsService } from "src/experts/experts.service";
+import JwtAuthGuard from "src/auth/guards/jwt-guard";
 
 @Controller("queues")
 export class QueuesController {
   constructor(
     private readonly queuesService: QueuesService,
-    private readonly expertsService: ExpertsService,
+    private readonly expertsService: ExpertsService
   ) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async createQueue(@Body() data: CreateQueueDto, @Res() res: Response) {
     const expertExist = await this.expertsService.findExpert(data.expert_id);
@@ -30,12 +33,12 @@ export class QueuesController {
     }
 
     const queueExistToday = await this.queuesService.queueExpertExistToday(
-      data.expert_id,
+      data.expert_id
     );
 
     if (queueExistToday) {
       throw new BadRequestException(
-        "Já existe uma fila para esse expert na data de hoje",
+        "Já existe uma fila para esse expert na data de hoje"
       );
     }
 
@@ -47,7 +50,7 @@ export class QueuesController {
   @Get()
   async getExpertQueues(
     @Query("expert_id") expert_id: number,
-    @Res() res: Response,
+    @Res() res: Response
   ) {
     if (expert_id) {
       const expertExist = await this.expertsService.findExpert(expert_id);
