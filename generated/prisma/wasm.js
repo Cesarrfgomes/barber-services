@@ -133,6 +133,14 @@ exports.Prisma.QueueScalarFieldEnum = {
   expert_id: 'expert_id'
 };
 
+exports.Prisma.CustomerQueueScalarFieldEnum = {
+  id: 'id',
+  queue_id: 'queue_id',
+  name: 'name',
+  service: 'service',
+  isAwaiting: 'isAwaiting'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -151,7 +159,8 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Expert: 'Expert',
-  Queue: 'Queue'
+  Queue: 'Queue',
+  CustomerQueue: 'CustomerQueue'
 };
 
 /**

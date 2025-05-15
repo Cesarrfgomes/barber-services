@@ -23,6 +23,11 @@ export type Expert = $Result.DefaultSelection<Prisma.$ExpertPayload>
  * 
  */
 export type Queue = $Result.DefaultSelection<Prisma.$QueuePayload>
+/**
+ * Model CustomerQueue
+ * 
+ */
+export type CustomerQueue = $Result.DefaultSelection<Prisma.$CustomerQueuePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -168,6 +173,16 @@ export class PrismaClient<
     * ```
     */
   get queue(): Prisma.QueueDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.customerQueue`: Exposes CRUD operations for the **CustomerQueue** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CustomerQueues
+    * const customerQueues = await prisma.customerQueue.findMany()
+    * ```
+    */
+  get customerQueue(): Prisma.CustomerQueueDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -609,7 +624,8 @@ export namespace Prisma {
 
   export const ModelName: {
     Expert: 'Expert',
-    Queue: 'Queue'
+    Queue: 'Queue',
+    CustomerQueue: 'CustomerQueue'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -628,7 +644,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "expert" | "queue"
+      modelProps: "expert" | "queue" | "customerQueue"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -780,6 +796,80 @@ export namespace Prisma {
           }
         }
       }
+      CustomerQueue: {
+        payload: Prisma.$CustomerQueuePayload<ExtArgs>
+        fields: Prisma.CustomerQueueFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CustomerQueueFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerQueuePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CustomerQueueFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerQueuePayload>
+          }
+          findFirst: {
+            args: Prisma.CustomerQueueFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerQueuePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CustomerQueueFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerQueuePayload>
+          }
+          findMany: {
+            args: Prisma.CustomerQueueFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerQueuePayload>[]
+          }
+          create: {
+            args: Prisma.CustomerQueueCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerQueuePayload>
+          }
+          createMany: {
+            args: Prisma.CustomerQueueCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CustomerQueueCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerQueuePayload>[]
+          }
+          delete: {
+            args: Prisma.CustomerQueueDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerQueuePayload>
+          }
+          update: {
+            args: Prisma.CustomerQueueUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerQueuePayload>
+          }
+          deleteMany: {
+            args: Prisma.CustomerQueueDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CustomerQueueUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CustomerQueueUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerQueuePayload>[]
+          }
+          upsert: {
+            args: Prisma.CustomerQueueUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomerQueuePayload>
+          }
+          aggregate: {
+            args: Prisma.CustomerQueueAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCustomerQueue>
+          }
+          groupBy: {
+            args: Prisma.CustomerQueueGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CustomerQueueGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CustomerQueueCountArgs<ExtArgs>
+            result: $Utils.Optional<CustomerQueueCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -866,6 +956,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     expert?: ExpertOmit
     queue?: QueueOmit
+    customerQueue?: CustomerQueueOmit
   }
 
   /* Types for Logging */
@@ -983,6 +1074,37 @@ export namespace Prisma {
    */
   export type ExpertCountOutputTypeCountQueueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: QueueWhereInput
+  }
+
+
+  /**
+   * Count Type QueueCountOutputType
+   */
+
+  export type QueueCountOutputType = {
+    CustomerQueue: number
+  }
+
+  export type QueueCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    CustomerQueue?: boolean | QueueCountOutputTypeCountCustomerQueueArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * QueueCountOutputType without action
+   */
+  export type QueueCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QueueCountOutputType
+     */
+    select?: QueueCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * QueueCountOutputType without action
+   */
+  export type QueueCountOutputTypeCountCustomerQueueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CustomerQueueWhereInput
   }
 
 
@@ -2268,6 +2390,8 @@ export namespace Prisma {
     createdAt?: boolean
     expert_id?: boolean
     expert?: boolean | ExpertDefaultArgs<ExtArgs>
+    CustomerQueue?: boolean | Queue$CustomerQueueArgs<ExtArgs>
+    _count?: boolean | QueueCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["queue"]>
 
   export type QueueSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2293,6 +2417,8 @@ export namespace Prisma {
   export type QueueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "expert_id", ExtArgs["result"]["queue"]>
   export type QueueInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     expert?: boolean | ExpertDefaultArgs<ExtArgs>
+    CustomerQueue?: boolean | Queue$CustomerQueueArgs<ExtArgs>
+    _count?: boolean | QueueCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type QueueIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     expert?: boolean | ExpertDefaultArgs<ExtArgs>
@@ -2305,6 +2431,7 @@ export namespace Prisma {
     name: "Queue"
     objects: {
       expert: Prisma.$ExpertPayload<ExtArgs>
+      CustomerQueue: Prisma.$CustomerQueuePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2705,6 +2832,7 @@ export namespace Prisma {
   export interface Prisma__QueueClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     expert<T extends ExpertDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExpertDefaultArgs<ExtArgs>>): Prisma__ExpertClient<$Result.GetResult<Prisma.$ExpertPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    CustomerQueue<T extends Queue$CustomerQueueArgs<ExtArgs> = {}>(args?: Subset<T, Queue$CustomerQueueArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerQueuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3133,6 +3261,30 @@ export namespace Prisma {
   }
 
   /**
+   * Queue.CustomerQueue
+   */
+  export type Queue$CustomerQueueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerQueue
+     */
+    select?: CustomerQueueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerQueue
+     */
+    omit?: CustomerQueueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerQueueInclude<ExtArgs> | null
+    where?: CustomerQueueWhereInput
+    orderBy?: CustomerQueueOrderByWithRelationInput | CustomerQueueOrderByWithRelationInput[]
+    cursor?: CustomerQueueWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CustomerQueueScalarFieldEnum | CustomerQueueScalarFieldEnum[]
+  }
+
+  /**
    * Queue without action
    */
   export type QueueDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3148,6 +3300,1102 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: QueueInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CustomerQueue
+   */
+
+  export type AggregateCustomerQueue = {
+    _count: CustomerQueueCountAggregateOutputType | null
+    _avg: CustomerQueueAvgAggregateOutputType | null
+    _sum: CustomerQueueSumAggregateOutputType | null
+    _min: CustomerQueueMinAggregateOutputType | null
+    _max: CustomerQueueMaxAggregateOutputType | null
+  }
+
+  export type CustomerQueueAvgAggregateOutputType = {
+    id: number | null
+    queue_id: number | null
+  }
+
+  export type CustomerQueueSumAggregateOutputType = {
+    id: number | null
+    queue_id: number | null
+  }
+
+  export type CustomerQueueMinAggregateOutputType = {
+    id: number | null
+    queue_id: number | null
+    name: string | null
+    service: string | null
+    isAwaiting: boolean | null
+  }
+
+  export type CustomerQueueMaxAggregateOutputType = {
+    id: number | null
+    queue_id: number | null
+    name: string | null
+    service: string | null
+    isAwaiting: boolean | null
+  }
+
+  export type CustomerQueueCountAggregateOutputType = {
+    id: number
+    queue_id: number
+    name: number
+    service: number
+    isAwaiting: number
+    _all: number
+  }
+
+
+  export type CustomerQueueAvgAggregateInputType = {
+    id?: true
+    queue_id?: true
+  }
+
+  export type CustomerQueueSumAggregateInputType = {
+    id?: true
+    queue_id?: true
+  }
+
+  export type CustomerQueueMinAggregateInputType = {
+    id?: true
+    queue_id?: true
+    name?: true
+    service?: true
+    isAwaiting?: true
+  }
+
+  export type CustomerQueueMaxAggregateInputType = {
+    id?: true
+    queue_id?: true
+    name?: true
+    service?: true
+    isAwaiting?: true
+  }
+
+  export type CustomerQueueCountAggregateInputType = {
+    id?: true
+    queue_id?: true
+    name?: true
+    service?: true
+    isAwaiting?: true
+    _all?: true
+  }
+
+  export type CustomerQueueAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CustomerQueue to aggregate.
+     */
+    where?: CustomerQueueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomerQueues to fetch.
+     */
+    orderBy?: CustomerQueueOrderByWithRelationInput | CustomerQueueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CustomerQueueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomerQueues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomerQueues.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CustomerQueues
+    **/
+    _count?: true | CustomerQueueCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CustomerQueueAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CustomerQueueSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CustomerQueueMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CustomerQueueMaxAggregateInputType
+  }
+
+  export type GetCustomerQueueAggregateType<T extends CustomerQueueAggregateArgs> = {
+        [P in keyof T & keyof AggregateCustomerQueue]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCustomerQueue[P]>
+      : GetScalarType<T[P], AggregateCustomerQueue[P]>
+  }
+
+
+
+
+  export type CustomerQueueGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CustomerQueueWhereInput
+    orderBy?: CustomerQueueOrderByWithAggregationInput | CustomerQueueOrderByWithAggregationInput[]
+    by: CustomerQueueScalarFieldEnum[] | CustomerQueueScalarFieldEnum
+    having?: CustomerQueueScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CustomerQueueCountAggregateInputType | true
+    _avg?: CustomerQueueAvgAggregateInputType
+    _sum?: CustomerQueueSumAggregateInputType
+    _min?: CustomerQueueMinAggregateInputType
+    _max?: CustomerQueueMaxAggregateInputType
+  }
+
+  export type CustomerQueueGroupByOutputType = {
+    id: number
+    queue_id: number
+    name: string
+    service: string
+    isAwaiting: boolean
+    _count: CustomerQueueCountAggregateOutputType | null
+    _avg: CustomerQueueAvgAggregateOutputType | null
+    _sum: CustomerQueueSumAggregateOutputType | null
+    _min: CustomerQueueMinAggregateOutputType | null
+    _max: CustomerQueueMaxAggregateOutputType | null
+  }
+
+  type GetCustomerQueueGroupByPayload<T extends CustomerQueueGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CustomerQueueGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CustomerQueueGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CustomerQueueGroupByOutputType[P]>
+            : GetScalarType<T[P], CustomerQueueGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CustomerQueueSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    queue_id?: boolean
+    name?: boolean
+    service?: boolean
+    isAwaiting?: boolean
+    queue?: boolean | QueueDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["customerQueue"]>
+
+  export type CustomerQueueSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    queue_id?: boolean
+    name?: boolean
+    service?: boolean
+    isAwaiting?: boolean
+    queue?: boolean | QueueDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["customerQueue"]>
+
+  export type CustomerQueueSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    queue_id?: boolean
+    name?: boolean
+    service?: boolean
+    isAwaiting?: boolean
+    queue?: boolean | QueueDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["customerQueue"]>
+
+  export type CustomerQueueSelectScalar = {
+    id?: boolean
+    queue_id?: boolean
+    name?: boolean
+    service?: boolean
+    isAwaiting?: boolean
+  }
+
+  export type CustomerQueueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "queue_id" | "name" | "service" | "isAwaiting", ExtArgs["result"]["customerQueue"]>
+  export type CustomerQueueInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    queue?: boolean | QueueDefaultArgs<ExtArgs>
+  }
+  export type CustomerQueueIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    queue?: boolean | QueueDefaultArgs<ExtArgs>
+  }
+  export type CustomerQueueIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    queue?: boolean | QueueDefaultArgs<ExtArgs>
+  }
+
+  export type $CustomerQueuePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CustomerQueue"
+    objects: {
+      queue: Prisma.$QueuePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      queue_id: number
+      name: string
+      service: string
+      isAwaiting: boolean
+    }, ExtArgs["result"]["customerQueue"]>
+    composites: {}
+  }
+
+  type CustomerQueueGetPayload<S extends boolean | null | undefined | CustomerQueueDefaultArgs> = $Result.GetResult<Prisma.$CustomerQueuePayload, S>
+
+  type CustomerQueueCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CustomerQueueFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CustomerQueueCountAggregateInputType | true
+    }
+
+  export interface CustomerQueueDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CustomerQueue'], meta: { name: 'CustomerQueue' } }
+    /**
+     * Find zero or one CustomerQueue that matches the filter.
+     * @param {CustomerQueueFindUniqueArgs} args - Arguments to find a CustomerQueue
+     * @example
+     * // Get one CustomerQueue
+     * const customerQueue = await prisma.customerQueue.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CustomerQueueFindUniqueArgs>(args: SelectSubset<T, CustomerQueueFindUniqueArgs<ExtArgs>>): Prisma__CustomerQueueClient<$Result.GetResult<Prisma.$CustomerQueuePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CustomerQueue that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CustomerQueueFindUniqueOrThrowArgs} args - Arguments to find a CustomerQueue
+     * @example
+     * // Get one CustomerQueue
+     * const customerQueue = await prisma.customerQueue.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CustomerQueueFindUniqueOrThrowArgs>(args: SelectSubset<T, CustomerQueueFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CustomerQueueClient<$Result.GetResult<Prisma.$CustomerQueuePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CustomerQueue that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomerQueueFindFirstArgs} args - Arguments to find a CustomerQueue
+     * @example
+     * // Get one CustomerQueue
+     * const customerQueue = await prisma.customerQueue.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CustomerQueueFindFirstArgs>(args?: SelectSubset<T, CustomerQueueFindFirstArgs<ExtArgs>>): Prisma__CustomerQueueClient<$Result.GetResult<Prisma.$CustomerQueuePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CustomerQueue that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomerQueueFindFirstOrThrowArgs} args - Arguments to find a CustomerQueue
+     * @example
+     * // Get one CustomerQueue
+     * const customerQueue = await prisma.customerQueue.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CustomerQueueFindFirstOrThrowArgs>(args?: SelectSubset<T, CustomerQueueFindFirstOrThrowArgs<ExtArgs>>): Prisma__CustomerQueueClient<$Result.GetResult<Prisma.$CustomerQueuePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CustomerQueues that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomerQueueFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CustomerQueues
+     * const customerQueues = await prisma.customerQueue.findMany()
+     * 
+     * // Get first 10 CustomerQueues
+     * const customerQueues = await prisma.customerQueue.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const customerQueueWithIdOnly = await prisma.customerQueue.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CustomerQueueFindManyArgs>(args?: SelectSubset<T, CustomerQueueFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerQueuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CustomerQueue.
+     * @param {CustomerQueueCreateArgs} args - Arguments to create a CustomerQueue.
+     * @example
+     * // Create one CustomerQueue
+     * const CustomerQueue = await prisma.customerQueue.create({
+     *   data: {
+     *     // ... data to create a CustomerQueue
+     *   }
+     * })
+     * 
+     */
+    create<T extends CustomerQueueCreateArgs>(args: SelectSubset<T, CustomerQueueCreateArgs<ExtArgs>>): Prisma__CustomerQueueClient<$Result.GetResult<Prisma.$CustomerQueuePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CustomerQueues.
+     * @param {CustomerQueueCreateManyArgs} args - Arguments to create many CustomerQueues.
+     * @example
+     * // Create many CustomerQueues
+     * const customerQueue = await prisma.customerQueue.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CustomerQueueCreateManyArgs>(args?: SelectSubset<T, CustomerQueueCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CustomerQueues and returns the data saved in the database.
+     * @param {CustomerQueueCreateManyAndReturnArgs} args - Arguments to create many CustomerQueues.
+     * @example
+     * // Create many CustomerQueues
+     * const customerQueue = await prisma.customerQueue.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CustomerQueues and only return the `id`
+     * const customerQueueWithIdOnly = await prisma.customerQueue.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CustomerQueueCreateManyAndReturnArgs>(args?: SelectSubset<T, CustomerQueueCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerQueuePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CustomerQueue.
+     * @param {CustomerQueueDeleteArgs} args - Arguments to delete one CustomerQueue.
+     * @example
+     * // Delete one CustomerQueue
+     * const CustomerQueue = await prisma.customerQueue.delete({
+     *   where: {
+     *     // ... filter to delete one CustomerQueue
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CustomerQueueDeleteArgs>(args: SelectSubset<T, CustomerQueueDeleteArgs<ExtArgs>>): Prisma__CustomerQueueClient<$Result.GetResult<Prisma.$CustomerQueuePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CustomerQueue.
+     * @param {CustomerQueueUpdateArgs} args - Arguments to update one CustomerQueue.
+     * @example
+     * // Update one CustomerQueue
+     * const customerQueue = await prisma.customerQueue.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CustomerQueueUpdateArgs>(args: SelectSubset<T, CustomerQueueUpdateArgs<ExtArgs>>): Prisma__CustomerQueueClient<$Result.GetResult<Prisma.$CustomerQueuePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CustomerQueues.
+     * @param {CustomerQueueDeleteManyArgs} args - Arguments to filter CustomerQueues to delete.
+     * @example
+     * // Delete a few CustomerQueues
+     * const { count } = await prisma.customerQueue.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CustomerQueueDeleteManyArgs>(args?: SelectSubset<T, CustomerQueueDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CustomerQueues.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomerQueueUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CustomerQueues
+     * const customerQueue = await prisma.customerQueue.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CustomerQueueUpdateManyArgs>(args: SelectSubset<T, CustomerQueueUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CustomerQueues and returns the data updated in the database.
+     * @param {CustomerQueueUpdateManyAndReturnArgs} args - Arguments to update many CustomerQueues.
+     * @example
+     * // Update many CustomerQueues
+     * const customerQueue = await prisma.customerQueue.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CustomerQueues and only return the `id`
+     * const customerQueueWithIdOnly = await prisma.customerQueue.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CustomerQueueUpdateManyAndReturnArgs>(args: SelectSubset<T, CustomerQueueUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerQueuePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CustomerQueue.
+     * @param {CustomerQueueUpsertArgs} args - Arguments to update or create a CustomerQueue.
+     * @example
+     * // Update or create a CustomerQueue
+     * const customerQueue = await prisma.customerQueue.upsert({
+     *   create: {
+     *     // ... data to create a CustomerQueue
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CustomerQueue we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CustomerQueueUpsertArgs>(args: SelectSubset<T, CustomerQueueUpsertArgs<ExtArgs>>): Prisma__CustomerQueueClient<$Result.GetResult<Prisma.$CustomerQueuePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CustomerQueues.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomerQueueCountArgs} args - Arguments to filter CustomerQueues to count.
+     * @example
+     * // Count the number of CustomerQueues
+     * const count = await prisma.customerQueue.count({
+     *   where: {
+     *     // ... the filter for the CustomerQueues we want to count
+     *   }
+     * })
+    **/
+    count<T extends CustomerQueueCountArgs>(
+      args?: Subset<T, CustomerQueueCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CustomerQueueCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CustomerQueue.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomerQueueAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CustomerQueueAggregateArgs>(args: Subset<T, CustomerQueueAggregateArgs>): Prisma.PrismaPromise<GetCustomerQueueAggregateType<T>>
+
+    /**
+     * Group by CustomerQueue.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomerQueueGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CustomerQueueGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CustomerQueueGroupByArgs['orderBy'] }
+        : { orderBy?: CustomerQueueGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CustomerQueueGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCustomerQueueGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CustomerQueue model
+   */
+  readonly fields: CustomerQueueFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CustomerQueue.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CustomerQueueClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    queue<T extends QueueDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QueueDefaultArgs<ExtArgs>>): Prisma__QueueClient<$Result.GetResult<Prisma.$QueuePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CustomerQueue model
+   */
+  interface CustomerQueueFieldRefs {
+    readonly id: FieldRef<"CustomerQueue", 'Int'>
+    readonly queue_id: FieldRef<"CustomerQueue", 'Int'>
+    readonly name: FieldRef<"CustomerQueue", 'String'>
+    readonly service: FieldRef<"CustomerQueue", 'String'>
+    readonly isAwaiting: FieldRef<"CustomerQueue", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CustomerQueue findUnique
+   */
+  export type CustomerQueueFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerQueue
+     */
+    select?: CustomerQueueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerQueue
+     */
+    omit?: CustomerQueueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerQueueInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomerQueue to fetch.
+     */
+    where: CustomerQueueWhereUniqueInput
+  }
+
+  /**
+   * CustomerQueue findUniqueOrThrow
+   */
+  export type CustomerQueueFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerQueue
+     */
+    select?: CustomerQueueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerQueue
+     */
+    omit?: CustomerQueueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerQueueInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomerQueue to fetch.
+     */
+    where: CustomerQueueWhereUniqueInput
+  }
+
+  /**
+   * CustomerQueue findFirst
+   */
+  export type CustomerQueueFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerQueue
+     */
+    select?: CustomerQueueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerQueue
+     */
+    omit?: CustomerQueueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerQueueInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomerQueue to fetch.
+     */
+    where?: CustomerQueueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomerQueues to fetch.
+     */
+    orderBy?: CustomerQueueOrderByWithRelationInput | CustomerQueueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CustomerQueues.
+     */
+    cursor?: CustomerQueueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomerQueues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomerQueues.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CustomerQueues.
+     */
+    distinct?: CustomerQueueScalarFieldEnum | CustomerQueueScalarFieldEnum[]
+  }
+
+  /**
+   * CustomerQueue findFirstOrThrow
+   */
+  export type CustomerQueueFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerQueue
+     */
+    select?: CustomerQueueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerQueue
+     */
+    omit?: CustomerQueueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerQueueInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomerQueue to fetch.
+     */
+    where?: CustomerQueueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomerQueues to fetch.
+     */
+    orderBy?: CustomerQueueOrderByWithRelationInput | CustomerQueueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CustomerQueues.
+     */
+    cursor?: CustomerQueueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomerQueues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomerQueues.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CustomerQueues.
+     */
+    distinct?: CustomerQueueScalarFieldEnum | CustomerQueueScalarFieldEnum[]
+  }
+
+  /**
+   * CustomerQueue findMany
+   */
+  export type CustomerQueueFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerQueue
+     */
+    select?: CustomerQueueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerQueue
+     */
+    omit?: CustomerQueueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerQueueInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomerQueues to fetch.
+     */
+    where?: CustomerQueueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomerQueues to fetch.
+     */
+    orderBy?: CustomerQueueOrderByWithRelationInput | CustomerQueueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CustomerQueues.
+     */
+    cursor?: CustomerQueueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomerQueues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomerQueues.
+     */
+    skip?: number
+    distinct?: CustomerQueueScalarFieldEnum | CustomerQueueScalarFieldEnum[]
+  }
+
+  /**
+   * CustomerQueue create
+   */
+  export type CustomerQueueCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerQueue
+     */
+    select?: CustomerQueueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerQueue
+     */
+    omit?: CustomerQueueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerQueueInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CustomerQueue.
+     */
+    data: XOR<CustomerQueueCreateInput, CustomerQueueUncheckedCreateInput>
+  }
+
+  /**
+   * CustomerQueue createMany
+   */
+  export type CustomerQueueCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CustomerQueues.
+     */
+    data: CustomerQueueCreateManyInput | CustomerQueueCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CustomerQueue createManyAndReturn
+   */
+  export type CustomerQueueCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerQueue
+     */
+    select?: CustomerQueueSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerQueue
+     */
+    omit?: CustomerQueueOmit<ExtArgs> | null
+    /**
+     * The data used to create many CustomerQueues.
+     */
+    data: CustomerQueueCreateManyInput | CustomerQueueCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerQueueIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CustomerQueue update
+   */
+  export type CustomerQueueUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerQueue
+     */
+    select?: CustomerQueueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerQueue
+     */
+    omit?: CustomerQueueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerQueueInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CustomerQueue.
+     */
+    data: XOR<CustomerQueueUpdateInput, CustomerQueueUncheckedUpdateInput>
+    /**
+     * Choose, which CustomerQueue to update.
+     */
+    where: CustomerQueueWhereUniqueInput
+  }
+
+  /**
+   * CustomerQueue updateMany
+   */
+  export type CustomerQueueUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CustomerQueues.
+     */
+    data: XOR<CustomerQueueUpdateManyMutationInput, CustomerQueueUncheckedUpdateManyInput>
+    /**
+     * Filter which CustomerQueues to update
+     */
+    where?: CustomerQueueWhereInput
+    /**
+     * Limit how many CustomerQueues to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CustomerQueue updateManyAndReturn
+   */
+  export type CustomerQueueUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerQueue
+     */
+    select?: CustomerQueueSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerQueue
+     */
+    omit?: CustomerQueueOmit<ExtArgs> | null
+    /**
+     * The data used to update CustomerQueues.
+     */
+    data: XOR<CustomerQueueUpdateManyMutationInput, CustomerQueueUncheckedUpdateManyInput>
+    /**
+     * Filter which CustomerQueues to update
+     */
+    where?: CustomerQueueWhereInput
+    /**
+     * Limit how many CustomerQueues to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerQueueIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CustomerQueue upsert
+   */
+  export type CustomerQueueUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerQueue
+     */
+    select?: CustomerQueueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerQueue
+     */
+    omit?: CustomerQueueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerQueueInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CustomerQueue to update in case it exists.
+     */
+    where: CustomerQueueWhereUniqueInput
+    /**
+     * In case the CustomerQueue found by the `where` argument doesn't exist, create a new CustomerQueue with this data.
+     */
+    create: XOR<CustomerQueueCreateInput, CustomerQueueUncheckedCreateInput>
+    /**
+     * In case the CustomerQueue was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CustomerQueueUpdateInput, CustomerQueueUncheckedUpdateInput>
+  }
+
+  /**
+   * CustomerQueue delete
+   */
+  export type CustomerQueueDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerQueue
+     */
+    select?: CustomerQueueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerQueue
+     */
+    omit?: CustomerQueueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerQueueInclude<ExtArgs> | null
+    /**
+     * Filter which CustomerQueue to delete.
+     */
+    where: CustomerQueueWhereUniqueInput
+  }
+
+  /**
+   * CustomerQueue deleteMany
+   */
+  export type CustomerQueueDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CustomerQueues to delete
+     */
+    where?: CustomerQueueWhereInput
+    /**
+     * Limit how many CustomerQueues to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CustomerQueue without action
+   */
+  export type CustomerQueueDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomerQueue
+     */
+    select?: CustomerQueueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomerQueue
+     */
+    omit?: CustomerQueueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerQueueInclude<ExtArgs> | null
   }
 
 
@@ -3182,6 +4430,17 @@ export namespace Prisma {
   };
 
   export type QueueScalarFieldEnum = (typeof QueueScalarFieldEnum)[keyof typeof QueueScalarFieldEnum]
+
+
+  export const CustomerQueueScalarFieldEnum: {
+    id: 'id',
+    queue_id: 'queue_id',
+    name: 'name',
+    service: 'service',
+    isAwaiting: 'isAwaiting'
+  };
+
+  export type CustomerQueueScalarFieldEnum = (typeof CustomerQueueScalarFieldEnum)[keyof typeof CustomerQueueScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3252,6 +4511,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -3332,6 +4598,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Queue"> | Date | string
     expert_id?: IntFilter<"Queue"> | number
     expert?: XOR<ExpertScalarRelationFilter, ExpertWhereInput>
+    CustomerQueue?: CustomerQueueListRelationFilter
   }
 
   export type QueueOrderByWithRelationInput = {
@@ -3339,6 +4606,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     expert_id?: SortOrder
     expert?: ExpertOrderByWithRelationInput
+    CustomerQueue?: CustomerQueueOrderByRelationAggregateInput
   }
 
   export type QueueWhereUniqueInput = Prisma.AtLeast<{
@@ -3349,6 +4617,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Queue"> | Date | string
     expert_id?: IntFilter<"Queue"> | number
     expert?: XOR<ExpertScalarRelationFilter, ExpertWhereInput>
+    CustomerQueue?: CustomerQueueListRelationFilter
   }, "id">
 
   export type QueueOrderByWithAggregationInput = {
@@ -3369,6 +4638,63 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Queue"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Queue"> | Date | string
     expert_id?: IntWithAggregatesFilter<"Queue"> | number
+  }
+
+  export type CustomerQueueWhereInput = {
+    AND?: CustomerQueueWhereInput | CustomerQueueWhereInput[]
+    OR?: CustomerQueueWhereInput[]
+    NOT?: CustomerQueueWhereInput | CustomerQueueWhereInput[]
+    id?: IntFilter<"CustomerQueue"> | number
+    queue_id?: IntFilter<"CustomerQueue"> | number
+    name?: StringFilter<"CustomerQueue"> | string
+    service?: StringFilter<"CustomerQueue"> | string
+    isAwaiting?: BoolFilter<"CustomerQueue"> | boolean
+    queue?: XOR<QueueScalarRelationFilter, QueueWhereInput>
+  }
+
+  export type CustomerQueueOrderByWithRelationInput = {
+    id?: SortOrder
+    queue_id?: SortOrder
+    name?: SortOrder
+    service?: SortOrder
+    isAwaiting?: SortOrder
+    queue?: QueueOrderByWithRelationInput
+  }
+
+  export type CustomerQueueWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: CustomerQueueWhereInput | CustomerQueueWhereInput[]
+    OR?: CustomerQueueWhereInput[]
+    NOT?: CustomerQueueWhereInput | CustomerQueueWhereInput[]
+    queue_id?: IntFilter<"CustomerQueue"> | number
+    name?: StringFilter<"CustomerQueue"> | string
+    service?: StringFilter<"CustomerQueue"> | string
+    isAwaiting?: BoolFilter<"CustomerQueue"> | boolean
+    queue?: XOR<QueueScalarRelationFilter, QueueWhereInput>
+  }, "id">
+
+  export type CustomerQueueOrderByWithAggregationInput = {
+    id?: SortOrder
+    queue_id?: SortOrder
+    name?: SortOrder
+    service?: SortOrder
+    isAwaiting?: SortOrder
+    _count?: CustomerQueueCountOrderByAggregateInput
+    _avg?: CustomerQueueAvgOrderByAggregateInput
+    _max?: CustomerQueueMaxOrderByAggregateInput
+    _min?: CustomerQueueMinOrderByAggregateInput
+    _sum?: CustomerQueueSumOrderByAggregateInput
+  }
+
+  export type CustomerQueueScalarWhereWithAggregatesInput = {
+    AND?: CustomerQueueScalarWhereWithAggregatesInput | CustomerQueueScalarWhereWithAggregatesInput[]
+    OR?: CustomerQueueScalarWhereWithAggregatesInput[]
+    NOT?: CustomerQueueScalarWhereWithAggregatesInput | CustomerQueueScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"CustomerQueue"> | number
+    queue_id?: IntWithAggregatesFilter<"CustomerQueue"> | number
+    name?: StringWithAggregatesFilter<"CustomerQueue"> | string
+    service?: StringWithAggregatesFilter<"CustomerQueue"> | string
+    isAwaiting?: BoolWithAggregatesFilter<"CustomerQueue"> | boolean
   }
 
   export type ExpertCreateInput = {
@@ -3424,23 +4750,27 @@ export namespace Prisma {
   export type QueueCreateInput = {
     createdAt?: Date | string
     expert: ExpertCreateNestedOneWithoutQueueInput
+    CustomerQueue?: CustomerQueueCreateNestedManyWithoutQueueInput
   }
 
   export type QueueUncheckedCreateInput = {
     id?: number
     createdAt?: Date | string
     expert_id: number
+    CustomerQueue?: CustomerQueueUncheckedCreateNestedManyWithoutQueueInput
   }
 
   export type QueueUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expert?: ExpertUpdateOneRequiredWithoutQueueNestedInput
+    CustomerQueue?: CustomerQueueUpdateManyWithoutQueueNestedInput
   }
 
   export type QueueUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expert_id?: IntFieldUpdateOperationsInput | number
+    CustomerQueue?: CustomerQueueUncheckedUpdateManyWithoutQueueNestedInput
   }
 
   export type QueueCreateManyInput = {
@@ -3457,6 +4787,58 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expert_id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CustomerQueueCreateInput = {
+    name: string
+    service: string
+    isAwaiting?: boolean
+    queue: QueueCreateNestedOneWithoutCustomerQueueInput
+  }
+
+  export type CustomerQueueUncheckedCreateInput = {
+    id?: number
+    queue_id: number
+    name: string
+    service: string
+    isAwaiting?: boolean
+  }
+
+  export type CustomerQueueUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    service?: StringFieldUpdateOperationsInput | string
+    isAwaiting?: BoolFieldUpdateOperationsInput | boolean
+    queue?: QueueUpdateOneRequiredWithoutCustomerQueueNestedInput
+  }
+
+  export type CustomerQueueUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    queue_id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    service?: StringFieldUpdateOperationsInput | string
+    isAwaiting?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CustomerQueueCreateManyInput = {
+    id?: number
+    queue_id: number
+    name: string
+    service: string
+    isAwaiting?: boolean
+  }
+
+  export type CustomerQueueUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    service?: StringFieldUpdateOperationsInput | string
+    isAwaiting?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CustomerQueueUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    queue_id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    service?: StringFieldUpdateOperationsInput | string
+    isAwaiting?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -3612,6 +4994,16 @@ export namespace Prisma {
     isNot?: ExpertWhereInput
   }
 
+  export type CustomerQueueListRelationFilter = {
+    every?: CustomerQueueWhereInput
+    some?: CustomerQueueWhereInput
+    none?: CustomerQueueWhereInput
+  }
+
+  export type CustomerQueueOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type QueueCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
@@ -3652,6 +5044,58 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type QueueScalarRelationFilter = {
+    is?: QueueWhereInput
+    isNot?: QueueWhereInput
+  }
+
+  export type CustomerQueueCountOrderByAggregateInput = {
+    id?: SortOrder
+    queue_id?: SortOrder
+    name?: SortOrder
+    service?: SortOrder
+    isAwaiting?: SortOrder
+  }
+
+  export type CustomerQueueAvgOrderByAggregateInput = {
+    id?: SortOrder
+    queue_id?: SortOrder
+  }
+
+  export type CustomerQueueMaxOrderByAggregateInput = {
+    id?: SortOrder
+    queue_id?: SortOrder
+    name?: SortOrder
+    service?: SortOrder
+    isAwaiting?: SortOrder
+  }
+
+  export type CustomerQueueMinOrderByAggregateInput = {
+    id?: SortOrder
+    queue_id?: SortOrder
+    name?: SortOrder
+    service?: SortOrder
+    isAwaiting?: SortOrder
+  }
+
+  export type CustomerQueueSumOrderByAggregateInput = {
+    id?: SortOrder
+    queue_id?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type QueueCreateNestedManyWithoutExpertInput = {
@@ -3718,6 +5162,20 @@ export namespace Prisma {
     connect?: ExpertWhereUniqueInput
   }
 
+  export type CustomerQueueCreateNestedManyWithoutQueueInput = {
+    create?: XOR<CustomerQueueCreateWithoutQueueInput, CustomerQueueUncheckedCreateWithoutQueueInput> | CustomerQueueCreateWithoutQueueInput[] | CustomerQueueUncheckedCreateWithoutQueueInput[]
+    connectOrCreate?: CustomerQueueCreateOrConnectWithoutQueueInput | CustomerQueueCreateOrConnectWithoutQueueInput[]
+    createMany?: CustomerQueueCreateManyQueueInputEnvelope
+    connect?: CustomerQueueWhereUniqueInput | CustomerQueueWhereUniqueInput[]
+  }
+
+  export type CustomerQueueUncheckedCreateNestedManyWithoutQueueInput = {
+    create?: XOR<CustomerQueueCreateWithoutQueueInput, CustomerQueueUncheckedCreateWithoutQueueInput> | CustomerQueueCreateWithoutQueueInput[] | CustomerQueueUncheckedCreateWithoutQueueInput[]
+    connectOrCreate?: CustomerQueueCreateOrConnectWithoutQueueInput | CustomerQueueCreateOrConnectWithoutQueueInput[]
+    createMany?: CustomerQueueCreateManyQueueInputEnvelope
+    connect?: CustomerQueueWhereUniqueInput | CustomerQueueWhereUniqueInput[]
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -3728,6 +5186,52 @@ export namespace Prisma {
     upsert?: ExpertUpsertWithoutQueueInput
     connect?: ExpertWhereUniqueInput
     update?: XOR<XOR<ExpertUpdateToOneWithWhereWithoutQueueInput, ExpertUpdateWithoutQueueInput>, ExpertUncheckedUpdateWithoutQueueInput>
+  }
+
+  export type CustomerQueueUpdateManyWithoutQueueNestedInput = {
+    create?: XOR<CustomerQueueCreateWithoutQueueInput, CustomerQueueUncheckedCreateWithoutQueueInput> | CustomerQueueCreateWithoutQueueInput[] | CustomerQueueUncheckedCreateWithoutQueueInput[]
+    connectOrCreate?: CustomerQueueCreateOrConnectWithoutQueueInput | CustomerQueueCreateOrConnectWithoutQueueInput[]
+    upsert?: CustomerQueueUpsertWithWhereUniqueWithoutQueueInput | CustomerQueueUpsertWithWhereUniqueWithoutQueueInput[]
+    createMany?: CustomerQueueCreateManyQueueInputEnvelope
+    set?: CustomerQueueWhereUniqueInput | CustomerQueueWhereUniqueInput[]
+    disconnect?: CustomerQueueWhereUniqueInput | CustomerQueueWhereUniqueInput[]
+    delete?: CustomerQueueWhereUniqueInput | CustomerQueueWhereUniqueInput[]
+    connect?: CustomerQueueWhereUniqueInput | CustomerQueueWhereUniqueInput[]
+    update?: CustomerQueueUpdateWithWhereUniqueWithoutQueueInput | CustomerQueueUpdateWithWhereUniqueWithoutQueueInput[]
+    updateMany?: CustomerQueueUpdateManyWithWhereWithoutQueueInput | CustomerQueueUpdateManyWithWhereWithoutQueueInput[]
+    deleteMany?: CustomerQueueScalarWhereInput | CustomerQueueScalarWhereInput[]
+  }
+
+  export type CustomerQueueUncheckedUpdateManyWithoutQueueNestedInput = {
+    create?: XOR<CustomerQueueCreateWithoutQueueInput, CustomerQueueUncheckedCreateWithoutQueueInput> | CustomerQueueCreateWithoutQueueInput[] | CustomerQueueUncheckedCreateWithoutQueueInput[]
+    connectOrCreate?: CustomerQueueCreateOrConnectWithoutQueueInput | CustomerQueueCreateOrConnectWithoutQueueInput[]
+    upsert?: CustomerQueueUpsertWithWhereUniqueWithoutQueueInput | CustomerQueueUpsertWithWhereUniqueWithoutQueueInput[]
+    createMany?: CustomerQueueCreateManyQueueInputEnvelope
+    set?: CustomerQueueWhereUniqueInput | CustomerQueueWhereUniqueInput[]
+    disconnect?: CustomerQueueWhereUniqueInput | CustomerQueueWhereUniqueInput[]
+    delete?: CustomerQueueWhereUniqueInput | CustomerQueueWhereUniqueInput[]
+    connect?: CustomerQueueWhereUniqueInput | CustomerQueueWhereUniqueInput[]
+    update?: CustomerQueueUpdateWithWhereUniqueWithoutQueueInput | CustomerQueueUpdateWithWhereUniqueWithoutQueueInput[]
+    updateMany?: CustomerQueueUpdateManyWithWhereWithoutQueueInput | CustomerQueueUpdateManyWithWhereWithoutQueueInput[]
+    deleteMany?: CustomerQueueScalarWhereInput | CustomerQueueScalarWhereInput[]
+  }
+
+  export type QueueCreateNestedOneWithoutCustomerQueueInput = {
+    create?: XOR<QueueCreateWithoutCustomerQueueInput, QueueUncheckedCreateWithoutCustomerQueueInput>
+    connectOrCreate?: QueueCreateOrConnectWithoutCustomerQueueInput
+    connect?: QueueWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type QueueUpdateOneRequiredWithoutCustomerQueueNestedInput = {
+    create?: XOR<QueueCreateWithoutCustomerQueueInput, QueueUncheckedCreateWithoutCustomerQueueInput>
+    connectOrCreate?: QueueCreateOrConnectWithoutCustomerQueueInput
+    upsert?: QueueUpsertWithoutCustomerQueueInput
+    connect?: QueueWhereUniqueInput
+    update?: XOR<XOR<QueueUpdateToOneWithWhereWithoutCustomerQueueInput, QueueUpdateWithoutCustomerQueueInput>, QueueUncheckedUpdateWithoutCustomerQueueInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -3866,13 +5370,28 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type QueueCreateWithoutExpertInput = {
     createdAt?: Date | string
+    CustomerQueue?: CustomerQueueCreateNestedManyWithoutQueueInput
   }
 
   export type QueueUncheckedCreateWithoutExpertInput = {
     id?: number
     createdAt?: Date | string
+    CustomerQueue?: CustomerQueueUncheckedCreateNestedManyWithoutQueueInput
   }
 
   export type QueueCreateOrConnectWithoutExpertInput = {
@@ -3928,6 +5447,29 @@ export namespace Prisma {
     create: XOR<ExpertCreateWithoutQueueInput, ExpertUncheckedCreateWithoutQueueInput>
   }
 
+  export type CustomerQueueCreateWithoutQueueInput = {
+    name: string
+    service: string
+    isAwaiting?: boolean
+  }
+
+  export type CustomerQueueUncheckedCreateWithoutQueueInput = {
+    id?: number
+    name: string
+    service: string
+    isAwaiting?: boolean
+  }
+
+  export type CustomerQueueCreateOrConnectWithoutQueueInput = {
+    where: CustomerQueueWhereUniqueInput
+    create: XOR<CustomerQueueCreateWithoutQueueInput, CustomerQueueUncheckedCreateWithoutQueueInput>
+  }
+
+  export type CustomerQueueCreateManyQueueInputEnvelope = {
+    data: CustomerQueueCreateManyQueueInput | CustomerQueueCreateManyQueueInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ExpertUpsertWithoutQueueInput = {
     update: XOR<ExpertUpdateWithoutQueueInput, ExpertUncheckedUpdateWithoutQueueInput>
     create: XOR<ExpertCreateWithoutQueueInput, ExpertUncheckedCreateWithoutQueueInput>
@@ -3952,6 +5494,71 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type CustomerQueueUpsertWithWhereUniqueWithoutQueueInput = {
+    where: CustomerQueueWhereUniqueInput
+    update: XOR<CustomerQueueUpdateWithoutQueueInput, CustomerQueueUncheckedUpdateWithoutQueueInput>
+    create: XOR<CustomerQueueCreateWithoutQueueInput, CustomerQueueUncheckedCreateWithoutQueueInput>
+  }
+
+  export type CustomerQueueUpdateWithWhereUniqueWithoutQueueInput = {
+    where: CustomerQueueWhereUniqueInput
+    data: XOR<CustomerQueueUpdateWithoutQueueInput, CustomerQueueUncheckedUpdateWithoutQueueInput>
+  }
+
+  export type CustomerQueueUpdateManyWithWhereWithoutQueueInput = {
+    where: CustomerQueueScalarWhereInput
+    data: XOR<CustomerQueueUpdateManyMutationInput, CustomerQueueUncheckedUpdateManyWithoutQueueInput>
+  }
+
+  export type CustomerQueueScalarWhereInput = {
+    AND?: CustomerQueueScalarWhereInput | CustomerQueueScalarWhereInput[]
+    OR?: CustomerQueueScalarWhereInput[]
+    NOT?: CustomerQueueScalarWhereInput | CustomerQueueScalarWhereInput[]
+    id?: IntFilter<"CustomerQueue"> | number
+    queue_id?: IntFilter<"CustomerQueue"> | number
+    name?: StringFilter<"CustomerQueue"> | string
+    service?: StringFilter<"CustomerQueue"> | string
+    isAwaiting?: BoolFilter<"CustomerQueue"> | boolean
+  }
+
+  export type QueueCreateWithoutCustomerQueueInput = {
+    createdAt?: Date | string
+    expert: ExpertCreateNestedOneWithoutQueueInput
+  }
+
+  export type QueueUncheckedCreateWithoutCustomerQueueInput = {
+    id?: number
+    createdAt?: Date | string
+    expert_id: number
+  }
+
+  export type QueueCreateOrConnectWithoutCustomerQueueInput = {
+    where: QueueWhereUniqueInput
+    create: XOR<QueueCreateWithoutCustomerQueueInput, QueueUncheckedCreateWithoutCustomerQueueInput>
+  }
+
+  export type QueueUpsertWithoutCustomerQueueInput = {
+    update: XOR<QueueUpdateWithoutCustomerQueueInput, QueueUncheckedUpdateWithoutCustomerQueueInput>
+    create: XOR<QueueCreateWithoutCustomerQueueInput, QueueUncheckedCreateWithoutCustomerQueueInput>
+    where?: QueueWhereInput
+  }
+
+  export type QueueUpdateToOneWithWhereWithoutCustomerQueueInput = {
+    where?: QueueWhereInput
+    data: XOR<QueueUpdateWithoutCustomerQueueInput, QueueUncheckedUpdateWithoutCustomerQueueInput>
+  }
+
+  export type QueueUpdateWithoutCustomerQueueInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expert?: ExpertUpdateOneRequiredWithoutQueueNestedInput
+  }
+
+  export type QueueUncheckedUpdateWithoutCustomerQueueInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expert_id?: IntFieldUpdateOperationsInput | number
+  }
+
   export type QueueCreateManyExpertInput = {
     id?: number
     createdAt?: Date | string
@@ -3959,16 +5566,45 @@ export namespace Prisma {
 
   export type QueueUpdateWithoutExpertInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CustomerQueue?: CustomerQueueUpdateManyWithoutQueueNestedInput
   }
 
   export type QueueUncheckedUpdateWithoutExpertInput = {
     id?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CustomerQueue?: CustomerQueueUncheckedUpdateManyWithoutQueueNestedInput
   }
 
   export type QueueUncheckedUpdateManyWithoutExpertInput = {
     id?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomerQueueCreateManyQueueInput = {
+    id?: number
+    name: string
+    service: string
+    isAwaiting?: boolean
+  }
+
+  export type CustomerQueueUpdateWithoutQueueInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    service?: StringFieldUpdateOperationsInput | string
+    isAwaiting?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CustomerQueueUncheckedUpdateWithoutQueueInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    service?: StringFieldUpdateOperationsInput | string
+    isAwaiting?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CustomerQueueUncheckedUpdateManyWithoutQueueInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    service?: StringFieldUpdateOperationsInput | string
+    isAwaiting?: BoolFieldUpdateOperationsInput | boolean
   }
 
 

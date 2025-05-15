@@ -25,10 +25,22 @@ model Expert {
 }
 
 model Queue {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now()) @db.Date()
-  expert_id Int
-  expert    Expert   @relation(fields: [expert_id], references: [id])
+  id            Int             @id @default(autoincrement())
+  createdAt     DateTime        @default(now()) @db.Date()
+  expert_id     Int
+  expert        Expert          @relation(fields: [expert_id], references: [id])
+  CustomerQueue CustomerQueue[]
 
   @@map("queues")
+}
+
+model CustomerQueue {
+  id         Int     @id @default(autoincrement())
+  queue_id   Int
+  queue      Queue   @relation(fields: [queue_id], references: [id])
+  name       String
+  service    String
+  isAwaiting Boolean @default(true)
+
+  @@map("queue_customer")
 }
