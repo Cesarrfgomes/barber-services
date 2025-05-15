@@ -32,11 +32,11 @@ export class QueuesService {
       include: { expert: true, CustomerQueue: true },
     });
 
-    return todayQueues.map((queue) => {
+    return todayQueues.map(queue => {
       return {
         ...queue,
         CustomerQueue: queue.CustomerQueue.filter(
-          (customer) => customer.isAwaiting
+          customer => customer.isAwaiting,
         ),
       };
     });

@@ -18,16 +18,16 @@ import { QueuesService } from "src/queues/queues.service";
 export class QueuecustomersController {
   constructor(
     private readonly queuecustomersService: QueuecustomersService,
-    private readonly queuesService: QueuesService
+    private readonly queuesService: QueuesService,
   ) {}
 
   @Post()
   async addCustomer(
     @Body() data: CreateQueuecustomerDto,
-    @Res() res: Response
+    @Res() res: Response,
   ) {
     const queueExist = await this.queuecustomersService.getQueueTodayById(
-      data.queue_id
+      data.queue_id,
     );
 
     if (!queueExist) {
